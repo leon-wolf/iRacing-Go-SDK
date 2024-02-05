@@ -218,7 +218,7 @@ const DCDriversSoFar VariableName = "DCDriversSoFar"                            
 const DCLapStatus VariableName = "DCLapStatus"                                         // Status of driver change lap requirements,
 const dcPitSpeedLimiterToggle VariableName = "dcPitSpeedLimiterToggle"                 // In car traction control active,
 const dcStarter VariableName = "dcStarter"                                             // In car trigger car starter,
-const DisplayUnits = "DisplayUnits"                                                    // Default units for the user interface 0 = english 1  VariableName = metric,
+const DisplayUnits VariableName = "DisplayUnits"                                       // Default units for the user interface 0 = english 1  VariableName = metric,
 const dpFastRepair VariableName = "dpFastRepair"                                       // Pitstop fast repair set,
 const dpFuelAddKg VariableName = "dpFuelAddKg"                                         // Pitstop fuel add amount, kg
 const dpFuelAutoFillActive VariableName = "dpFuelAutoFillActive"                       // Pitstop auto fill fuel next stop flag,
