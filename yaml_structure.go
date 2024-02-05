@@ -1,5 +1,7 @@
 package irsdk
 
+import "time"
+
 type Session struct {
 	WeekendInfo struct {
 		TrackName              string `yaml:"TrackName" json:"track_name,omitempty"`
@@ -54,35 +56,34 @@ type Session struct {
 		BuildTarget            string `yaml:"BuildTarget" json:"build_target,omitempty"`
 		BuildVersion           string `yaml:"BuildVersion" json:"build_version,omitempty"`
 		WeekendOptions         struct {
-			NumStarters      int    `yaml:"NumStarters" json:"num_starters,omitempty"`
-			StartingGrid     string `yaml:"StartingGrid" json:"starting_grid,omitempty"`
-			QualifyScoring   string `yaml:"QualifyScoring" json:"qualify_scoring,omitempty"`
-			CourseCautions   string `yaml:"CourseCautions" json:"course_cautions,omitempty"`
-			StandingStart    int    `yaml:"StandingStart" json:"standing_start,omitempty"`
-			ShortParadeLap   int    `yaml:"ShortParadeLap" json:"short_parade_lap,omitempty"`
-			Restarts         string `yaml:"Restarts" json:"restarts,omitempty"`
-			WeatherType      string `yaml:"WeatherType" json:"weather_type,omitempty"`
-			Skies            string `yaml:"Skies" json:"skies,omitempty"`
-			WindDirection    string `yaml:"WindDirection" json:"wind_direction,omitempty"`
-			WindSpeed        string `yaml:"WindSpeed" json:"wind_speed,omitempty"`
-			WeatherTemp      string `yaml:"WeatherTemp" json:"weather_temp,omitempty"`
-			RelativeHumidity string `yaml:"RelativeHumidity" json:"relative_humidity,omitempty"`
-			FogLevel         string `yaml:"FogLevel" json:"fog_level,omitempty"`
-			TimeOfDay        string `yaml:"TimeOfDay" json:"time_of_day,omitempty"`
-			Date             struct {
-			} `yaml:"Date" json:"date"`
-			EarthRotationSpeedupFactor int    `yaml:"EarthRotationSpeedupFactor" json:"earth_rotation_speedup_factor,omitempty"`
-			Unofficial                 int    `yaml:"Unofficial" json:"unofficial,omitempty"`
-			CommercialMode             string `yaml:"CommercialMode" json:"commercial_mode,omitempty"`
-			NightMode                  string `yaml:"NightMode" json:"night_mode,omitempty"`
-			IsFixedSetup               int    `yaml:"IsFixedSetup" json:"is_fixed_setup,omitempty"`
-			StrictLapsChecking         string `yaml:"StrictLapsChecking" json:"strict_laps_checking,omitempty"`
-			HasOpenRegistration        int    `yaml:"HasOpenRegistration" json:"has_open_registration,omitempty"`
-			HardcoreLevel              int    `yaml:"HardcoreLevel" json:"hardcore_level,omitempty"`
-			NumJokerLaps               int    `yaml:"NumJokerLaps" json:"num_joker_laps,omitempty"`
-			IncidentLimit              string `yaml:"IncidentLimit" json:"incident_limit,omitempty"`
-			FastRepairsLimit           int    `yaml:"FastRepairsLimit" json:"fast_repairs_limit,omitempty"`
-			GreenWhiteCheckeredLimit   int    `yaml:"GreenWhiteCheckeredLimit" json:"green_white_checkered_limit,omitempty"`
+			NumStarters                int       `yaml:"NumStarters" json:"num_starters,omitempty"`
+			StartingGrid               string    `yaml:"StartingGrid" json:"starting_grid,omitempty"`
+			QualifyScoring             string    `yaml:"QualifyScoring" json:"qualify_scoring,omitempty"`
+			CourseCautions             string    `yaml:"CourseCautions" json:"course_cautions,omitempty"`
+			StandingStart              int       `yaml:"StandingStart" json:"standing_start,omitempty"`
+			ShortParadeLap             int       `yaml:"ShortParadeLap" json:"short_parade_lap,omitempty"`
+			Restarts                   string    `yaml:"Restarts" json:"restarts,omitempty"`
+			WeatherType                string    `yaml:"WeatherType" json:"weather_type,omitempty"`
+			Skies                      string    `yaml:"Skies" json:"skies,omitempty"`
+			WindDirection              string    `yaml:"WindDirection" json:"wind_direction,omitempty"`
+			WindSpeed                  string    `yaml:"WindSpeed" json:"wind_speed,omitempty"`
+			WeatherTemp                string    `yaml:"WeatherTemp" json:"weather_temp,omitempty"`
+			RelativeHumidity           string    `yaml:"RelativeHumidity" json:"relative_humidity,omitempty"`
+			FogLevel                   string    `yaml:"FogLevel" json:"fog_level,omitempty"`
+			TimeOfDay                  string    `yaml:"TimeOfDay" json:"time_of_day,omitempty"`
+			Date                       time.Time `yaml:"Date" json:"date"`
+			EarthRotationSpeedupFactor int       `yaml:"EarthRotationSpeedupFactor" json:"earth_rotation_speedup_factor,omitempty"`
+			Unofficial                 int       `yaml:"Unofficial" json:"unofficial,omitempty"`
+			CommercialMode             string    `yaml:"CommercialMode" json:"commercial_mode,omitempty"`
+			NightMode                  string    `yaml:"NightMode" json:"night_mode,omitempty"`
+			IsFixedSetup               int       `yaml:"IsFixedSetup" json:"is_fixed_setup,omitempty"`
+			StrictLapsChecking         string    `yaml:"StrictLapsChecking" json:"strict_laps_checking,omitempty"`
+			HasOpenRegistration        int       `yaml:"HasOpenRegistration" json:"has_open_registration,omitempty"`
+			HardcoreLevel              int       `yaml:"HardcoreLevel" json:"hardcore_level,omitempty"`
+			NumJokerLaps               int       `yaml:"NumJokerLaps" json:"num_joker_laps,omitempty"`
+			IncidentLimit              string    `yaml:"IncidentLimit" json:"incident_limit,omitempty"`
+			FastRepairsLimit           int       `yaml:"FastRepairsLimit" json:"fast_repairs_limit,omitempty"`
+			GreenWhiteCheckeredLimit   int       `yaml:"GreenWhiteCheckeredLimit" json:"green_white_checkered_limit,omitempty"`
 		} `yaml:"WeekendOptions" json:"weekend_options"`
 		TelemetryOptions struct {
 			TelemetryDiskFile string `yaml:"TelemetryDiskFile" json:"telemetry_disk_file,omitempty"`
