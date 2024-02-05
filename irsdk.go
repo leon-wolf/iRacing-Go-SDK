@@ -32,7 +32,7 @@ func (sdk *IRSDK) WaitForData(timeout time.Duration) bool {
 	return false
 }
 
-func (sdk *IRSDK) GetVar(name string) (Variable, error) {
+func (sdk *IRSDK) GetVar(name VariableName) (Variable, error) {
 	if !sessionStatusOK(sdk.h.status) {
 		return Variable{}, fmt.Errorf("session is not active")
 	}
