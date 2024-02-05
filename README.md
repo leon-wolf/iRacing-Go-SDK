@@ -37,6 +37,7 @@ package main
 import (
     "fmt"
     "log"
+	"time"
 
     "github.com/leon-wolf/iRacing-Go-SDK"
 )
