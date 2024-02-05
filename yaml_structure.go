@@ -1,4 +1,5 @@
 package irsdk
+
 type Session struct {
 	WeekendInfo struct {
 		TrackName              string `yaml:"TrackName"`
