@@ -7,9 +7,9 @@ import (
 type header struct {
 	version  int
 	status   int
-	tickRate int // ticks per second (60 or 360 etc)
+	tickRate int // ticks per second (60 or 360 etc.)
 
-	// session information, updated periodicaly
+	// session information, updated periodically
 	sessionInfoUpdate int // Incremented when session info changes
 	sessionInfoLen    int // Length in bytes of session info string
 	sessionInfoOffset int // Session info, encoded in YAML format

@@ -61,7 +61,7 @@ func (sdk *IRSDK) GetLastVersion() int {
 
 func (sdk *IRSDK) GetSessionData(path string) (string, error) {
 	if !sessionStatusOK(sdk.h.status) {
-		return "", fmt.Errorf("Session not connected")
+		return "", fmt.Errorf("session not connected")
 	}
 	return getSessionDataPath(sdk.s, path)
 }
@@ -76,22 +76,22 @@ func (sdk *IRSDK) IsConnected() bool {
 	return false
 }
 
-// ExportTo exports current memory data to a file
-func (sdk *IRSDK) ExportIbtTo(fileName string) {
+// ExportIbtTo ExportTo exports current memory data to a file
+func (sdk *IRSDK) ExportIbtTo(fileName string) error {
 	rbuf := make([]byte, fileMapSize)
 	_, err := sdk.r.ReadAt(rbuf, 0)
 	if err != nil {
 		log.Fatal(err)
 	}
 	err = os.WriteFile(fileName, rbuf, 0644)
-	handleError(err)
+	return err
 }
 
-// ExportTo exports current session yaml data to a file
-func (sdk *IRSDK) ExportSessionTo(fileName string) {
+// ExportSessionTo ExportTo exports current session yaml data to a file
+func (sdk *IRSDK) ExportSessionTo(fileName string) error {
 	y := strings.Join(sdk.s, "\n")
 	err := os.WriteFile(fileName, []byte(y), 0644)
-	handleError(err)
+	return err
 }
 
 func (sdk *IRSDK) BroadcastMsg(msg Msg) {
@@ -107,7 +107,7 @@ func (sdk *IRSDK) Close() {
 	handleError(err)
 }
 
-// Init creates a SDK instance to operate with
+// Init creates an SDK instance to operate with
 func Init(r reader) IRSDK {
 	if r == nil {
 		var err error
