@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/hidez8891/shm"
-	"github.com/quimcalpe/iracing-sdk/lib/winevents"
+	"github.com/leon-wolf/iRacing-Go-SDK/lib/winevents"
 )
 
 // IRSDK is the main SDK object clients must use

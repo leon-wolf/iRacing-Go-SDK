@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/quimcalpe/iracing-sdk"
+	"github.com/leon-wolf/iRacing-Go-SDK"
 )
 
 var sdk irsdk.IRSDK
