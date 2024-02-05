@@ -8,7 +8,7 @@ You need a gcc compiler to build the SDK, Golang does not have (as far as I know
 The easiest way is to install MiniGw for 64 bits: https://sourceforge.net/projects/mingw-w64/
 
 With a gcc compiler in place, you can follow the standard path get to external libs in Go
-1. Execute `go get github.com/quimcalpe/iracing-sdk`
+1. Execute `go get github.com/leon-wolf/iRacing-Go-SDK`
 
 ## Usage
 
@@ -18,7 +18,7 @@ package main
 
 import (
     "fmt"
-    "github.com/quimcalpe/iracing-sdk"
+    "github.com/leon-wolf/iRacing-Go-SDK"
 )
 
 func main() {
@@ -37,8 +37,9 @@ package main
 import (
     "fmt"
     "log"
+	"time"
 
-    "github.com/quimcalpe/iracing-sdk"
+    "github.com/leon-wolf/iRacing-Go-SDK"
 )
 
 func main() {
