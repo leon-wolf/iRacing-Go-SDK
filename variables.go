@@ -1,6 +1,8 @@
 package irsdk
 
 import (
+	"bytes"
+	"encoding/binary"
 	"fmt"
 	"log"
 	"sync"
@@ -111,28 +113,66 @@ func readVariableValues(sdk *IRSDK) bool {
 			sdk.lastValidData = time.Now().Unix()
 			for varName, v := range sdk.tVars.vars {
 				var rbuf []byte
+				size := 1
+				if v.count > 1 {
+					size = 64
+				}
 				switch v.varType {
 				case 0:
-					rbuf = make([]byte, 1)
+					rbuf = make([]byte, 1*size)
 					_, err := sdk.r.ReadAt(rbuf, int64(vb.bufOffset+v.offset))
 					if err != nil {
 						log.Fatal(err)
 					}
-					v.Value = string(rbuf[0])
+					if v.count > 1 {
+						arr := make([]int32, v.count)
+						r := bytes.NewReader(rbuf)
+						err = binary.Read(r, binary.LittleEndian, &arr)
+						if err != nil {
+							log.Fatalf("0 - %s: %s", v.Name, err)
+						}
+						v.Value = arr
+					} else {
+						v.Value = int32(rbuf[0])
+					}
 				case 1:
-					rbuf = make([]byte, 1)
+					rbuf = make([]byte, 1*size)
 					_, err := sdk.r.ReadAt(rbuf, int64(vb.bufOffset+v.offset))
 					if err != nil {
 						log.Fatal(err)
 					}
-					v.Value = int(rbuf[0]) > 0
+					if v.count > 1 {
+						arrTemp := make([]byte, v.count)
+						r := bytes.NewReader(rbuf)
+						err = binary.Read(r, binary.LittleEndian, &arrTemp)
+						if err != nil {
+							log.Fatalf("1 - %s: %s", v.Name, err)
+						}
+						arr := make([]bool, v.count)
+						for i := 0; i < v.count; i++ {
+							arr[i] = int(arrTemp[i]) > 0
+						}
+						v.Value = arr
+					} else {
+						v.Value = int(rbuf[0]) > 0
+					}
 				case 2:
-					rbuf = make([]byte, 4)
+					rbuf = make([]byte, 4*size)
 					_, err := sdk.r.ReadAt(rbuf, int64(vb.bufOffset+v.offset))
 					if err != nil {
 						log.Fatal(err)
 					}
-					v.Value = byte4ToInt(rbuf)
+					if v.count > 1 {
+						arr := make([]int32, v.count)
+						r := bytes.NewReader(rbuf)
+						err = binary.Read(r, binary.LittleEndian, &arr)
+						if err != nil {
+							log.Fatalf("4: %s", err)
+						}
+						v.Value = arr
+					} else {
+						v.Value = byte4ToInt(rbuf)
+					}
 				case 3:
 					rbuf = make([]byte, 4)
 					_, err := sdk.r.ReadAt(rbuf, int64(vb.bufOffset+v.offset))
@@ -141,19 +181,39 @@ func readVariableValues(sdk *IRSDK) bool {
 					}
 					v.Value = byte4toBitField(rbuf)
 				case 4:
-					rbuf = make([]byte, 4)
+					rbuf = make([]byte, 4*size)
 					_, err := sdk.r.ReadAt(rbuf, int64(vb.bufOffset+v.offset))
 					if err != nil {
 						log.Fatal(err)
 					}
-					v.Value = byte4ToFloat(rbuf)
+					if v.count > 1 {
+						arr := make([]float32, v.count)
+						r := bytes.NewReader(rbuf)
+						err = binary.Read(r, binary.LittleEndian, &arr)
+						if err != nil {
+							log.Fatalf("4: %s", err)
+						}
+						v.Value = arr
+					} else {
+						v.Value = byte4ToFloat(rbuf)
+					}
 				case 5:
-					rbuf = make([]byte, 8)
+					rbuf = make([]byte, 8*size)
 					_, err := sdk.r.ReadAt(rbuf, int64(vb.bufOffset+v.offset))
 					if err != nil {
 						log.Fatal(err)
 					}
-					v.Value = byte8ToFloat(rbuf)
+					if v.count > 1 {
+						arr := make([]float64, v.count)
+						r := bytes.NewReader(rbuf)
+						err = binary.Read(r, binary.LittleEndian, &arr)
+						if err != nil {
+							log.Fatal(err)
+						}
+						v.Value = arr
+					} else {
+						v.Value = byte8ToFloat(rbuf)
+					}
 				}
 				v.rawBytes = rbuf
 				sdk.tVars.vars[varName] = v
@@ -216,23 +276,23 @@ const CpuUsageBG VariableName = "CpuUsageBG"                                    
 const CpuUsageFG VariableName = "CpuUsageFG"                                           // Percent of available tim fg thread took with a 1 sec avg, %
 const DCDriversSoFar VariableName = "DCDriversSoFar"                                   // Number of team drivers who have run a stint,
 const DCLapStatus VariableName = "DCLapStatus"                                         // Status of driver change lap requirements,
-const dcPitSpeedLimiterToggle VariableName = "dcPitSpeedLimiterToggle"                 // In car traction control active,
-const dcStarter VariableName = "dcStarter"                                             // In car trigger car starter,
+const DcPitSpeedLimiterToggle VariableName = "dcPitSpeedLimiterToggle"                 // In car traction control active,
+const DcStarter VariableName = "dcStarter"                                             // In car trigger car starter,
 const DisplayUnits VariableName = "DisplayUnits"                                       // Default units for the user interface 0 = english 1  VariableName = metric,
-const dpFastRepair VariableName = "dpFastRepair"                                       // Pitstop fast repair set,
-const dpFuelAddKg VariableName = "dpFuelAddKg"                                         // Pitstop fuel add amount, kg
-const dpFuelAutoFillActive VariableName = "dpFuelAutoFillActive"                       // Pitstop auto fill fuel next stop flag,
-const dpFuelAutoFillEnabled VariableName = "dpFuelAutoFillEnabled"                     // Pitstop auto fill fuel system enabled,
-const dpFuelFill VariableName = "dpFuelFill"                                           // Pitstop fuel fill flag,
-const dpLFTireChange VariableName = "dpLFTireChange"                                   // Pitstop lf tire change request,
-const dpLFTireColdPress VariableName = "dpLFTireColdPress"                             // Pitstop lf tire cold pressure adjustment, Pa
-const dpLRTireChange VariableName = "dpLRTireChange"                                   // Pitstop lr tire change request,
-const dpLRTireColdPress VariableName = "dpLRTireColdPress"                             // Pitstop lr tire cold pressure adjustment, Pa
-const dpRFTireChange VariableName = "dpRFTireChange"                                   // Pitstop rf tire change request,
-const dpRFTireColdPress VariableName = "dpRFTireColdPress"                             // Pitstop rf cold tire pressure adjustment, Pa
-const dpRRTireChange VariableName = "dpRRTireChange"                                   // Pitstop rr tire change request,
-const dpRRTireColdPress VariableName = "dpRRTireColdPress"                             // Pitstop rr cold tire pressure adjustment, Pa
-const dpWindshieldTearoff VariableName = "dpWindshieldTearoff"                         // Pitstop windshield tearoff,
+const DpFastRepair VariableName = "dpFastRepair"                                       // Pitstop fast repair set,
+const DpFuelAddKg VariableName = "dpFuelAddKg"                                         // Pitstop fuel add amount, kg
+const DpFuelAutoFillActive VariableName = "dpFuelAutoFillActive"                       // Pitstop auto fill fuel next stop flag,
+const DpFuelAutoFillEnabled VariableName = "dpFuelAutoFillEnabled"                     // Pitstop auto fill fuel system enabled,
+const DpFuelFill VariableName = "dpFuelFill"                                           // Pitstop fuel fill flag,
+const DpLFTireChange VariableName = "dpLFTireChange"                                   // Pitstop lf tire change request,
+const DpLFTireColdPress VariableName = "dpLFTireColdPress"                             // Pitstop lf tire cold pressure adjustment, Pa
+const DpLRTireChange VariableName = "dpLRTireChange"                                   // Pitstop lr tire change request,
+const DpLRTireColdPress VariableName = "dpLRTireColdPress"                             // Pitstop lr tire cold pressure adjustment, Pa
+const DpRFTireChange VariableName = "dpRFTireChange"                                   // Pitstop rf tire change request,
+const DpRFTireColdPress VariableName = "dpRFTireColdPress"                             // Pitstop rf cold tire pressure adjustment, Pa
+const DpRRTireChange VariableName = "dpRRTireChange"                                   // Pitstop rr tire change request,
+const DpRRTireColdPress VariableName = "dpRRTireColdPress"                             // Pitstop rr cold tire pressure adjustment, Pa
+const DpWindshieldTearoff VariableName = "dpWindshieldTearoff"                         // Pitstop windshield tearoff,
 const DriverMarker VariableName = "DriverMarker"                                       // Driver activated flag,
 const Engine0_RPM VariableName = "Engine0_RPM"                                         // Engine0Engine rpm, revs/min
 const EngineWarnings VariableName = "EngineWarnings"                                   // Bitfield for warning lights, irsdk_EngineWarnings
