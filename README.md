@@ -1,6 +1,9 @@
 # Golang iRacing SDK
 
+Based on [quimcalpe/iracing-sdk](https://github.com/quimcalpe/iracing-sdk)
+
 Golang implementation of iRacing SDK
+
 
 ## Install
 
