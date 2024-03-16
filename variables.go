@@ -167,14 +167,14 @@ func readVariableValues(sdk *IRSDK) bool {
 						r := bytes.NewReader(rbuf)
 						err = binary.Read(r, binary.LittleEndian, &arr)
 						if err != nil {
-							log.Fatalf("4: %s", err)
+							log.Fatalf("2: %s", err)
 						}
 						v.Value = arr
 					} else {
 						v.Value = byte4ToInt(rbuf)
 					}
 				case 3:
-					rbuf = make([]byte, 4)
+					rbuf = make([]byte, 4*size)
 					_, err := sdk.r.ReadAt(rbuf, int64(vb.bufOffset+v.offset))
 					if err != nil {
 						log.Fatal(err)

@@ -151,83 +151,35 @@ type Session struct {
 		} `yaml:"Radios" json:"radios,omitempty"`
 	} `yaml:"RadioInfo" json:"radio_info"`
 	DriverInfo struct {
-		DriverCarIdx              int     `yaml:"DriverCarIdx" json:"driver_car_idx,omitempty"`
-		DriverUserID              int     `yaml:"DriverUserID" json:"driver_user_id,omitempty"`
-		PaceCarIdx                int     `yaml:"PaceCarIdx" json:"pace_car_idx,omitempty"`
-		DriverHeadPosX            float64 `yaml:"DriverHeadPosX" json:"driver_head_pos_x,omitempty"`
-		DriverHeadPosY            float64 `yaml:"DriverHeadPosY" json:"driver_head_pos_y,omitempty"`
-		DriverHeadPosZ            float64 `yaml:"DriverHeadPosZ" json:"driver_head_pos_z,omitempty"`
-		DriverCarIsElectric       int     `yaml:"DriverCarIsElectric" json:"driver_car_is_electric,omitempty"`
-		DriverCarIdleRPM          float64 `yaml:"DriverCarIdleRPM" json:"driver_car_idle_rpm,omitempty"`
-		DriverCarRedLine          float64 `yaml:"DriverCarRedLine" json:"driver_car_red_line,omitempty"`
-		DriverCarEngCylinderCount int     `yaml:"DriverCarEngCylinderCount" json:"driver_car_eng_cylinder_count,omitempty"`
-		DriverCarFuelKgPerLtr     float64 `yaml:"DriverCarFuelKgPerLtr" json:"driver_car_fuel_kg_per_ltr,omitempty"`
-		DriverCarFuelMaxLtr       float64 `yaml:"DriverCarFuelMaxLtr" json:"driver_car_fuel_max_ltr,omitempty"`
-		DriverCarMaxFuelPct       float64 `yaml:"DriverCarMaxFuelPct" json:"driver_car_max_fuel_pct,omitempty"`
-		DriverCarGearNumForward   int     `yaml:"DriverCarGearNumForward" json:"driver_car_gear_num_forward,omitempty"`
-		DriverCarGearNeutral      int     `yaml:"DriverCarGearNeutral" json:"driver_car_gear_neutral,omitempty"`
-		DriverCarGearReverse      int     `yaml:"DriverCarGearReverse" json:"driver_car_gear_reverse,omitempty"`
-		DriverCarSLFirstRPM       float64 `yaml:"DriverCarSLFirstRPM" json:"driver_car_sl_first_rpm,omitempty"`
-		DriverCarSLShiftRPM       float64 `yaml:"DriverCarSLShiftRPM" json:"driver_car_sl_shift_rpm,omitempty"`
-		DriverCarSLLastRPM        float64 `yaml:"DriverCarSLLastRPM" json:"driver_car_sl_last_rpm,omitempty"`
-		DriverCarSLBlinkRPM       float64 `yaml:"DriverCarSLBlinkRPM" json:"driver_car_sl_blink_rpm,omitempty"`
-		DriverCarVersion          string  `yaml:"DriverCarVersion" json:"driver_car_version,omitempty"`
-		DriverPitTrkPct           float64 `yaml:"DriverPitTrkPct" json:"driver_pit_trk_pct,omitempty"`
-		DriverCarEstLapTime       float64 `yaml:"DriverCarEstLapTime" json:"driver_car_est_lap_time,omitempty"`
-		DriverSetupName           string  `yaml:"DriverSetupName" json:"driver_setup_name,omitempty"`
-		DriverSetupIsModified     int     `yaml:"DriverSetupIsModified" json:"driver_setup_is_modified,omitempty"`
-		DriverSetupLoadTypeName   string  `yaml:"DriverSetupLoadTypeName" json:"driver_setup_load_type_name,omitempty"`
-		DriverSetupPassedTech     int     `yaml:"DriverSetupPassedTech" json:"driver_setup_passed_tech,omitempty"`
-		DriverIncidentCount       int     `yaml:"DriverIncidentCount" json:"driver_incident_count,omitempty"`
-		Drivers                   []struct {
-			CarIdx                  int     `yaml:"CarIdx" json:"car_idx,omitempty"`
-			UserName                string  `yaml:"UserName" json:"user_name,omitempty"`
-			AbbrevName              string  `yaml:"AbbrevName" json:"abbrev_name,omitempty"`
-			Initials                string  `yaml:"Initials" json:"initials,omitempty"`
-			UserID                  int     `yaml:"UserID" json:"user_id,omitempty"`
-			TeamID                  int     `yaml:"TeamID" json:"team_id,omitempty"`
-			TeamName                string  `yaml:"TeamName" json:"team_name,omitempty"`
-			CarNumber               string  `yaml:"CarNumber" json:"car_number,omitempty"`
-			CarNumberRaw            int     `yaml:"CarNumberRaw" json:"car_number_raw,omitempty"`
-			CarPath                 string  `yaml:"CarPath" json:"car_path,omitempty"`
-			CarClassID              int     `yaml:"CarClassID" json:"car_class_id,omitempty"`
-			CarID                   int     `yaml:"CarID" json:"car_id,omitempty"`
-			CarIsPaceCar            int     `yaml:"CarIsPaceCar" json:"car_is_pace_car,omitempty"`
-			CarIsAI                 int     `yaml:"CarIsAI" json:"car_is_ai,omitempty"`
-			CarIsElectric           int     `yaml:"CarIsElectric" json:"car_is_electric,omitempty"`
-			CarScreenName           string  `yaml:"CarScreenName" json:"car_screen_name,omitempty"`
-			CarScreenNameShort      string  `yaml:"CarScreenNameShort" json:"car_screen_name_short,omitempty"`
-			CarClassShortName       string  `yaml:"CarClassShortName" json:"car_class_short_name,omitempty"`
-			CarClassRelSpeed        int     `yaml:"CarClassRelSpeed" json:"car_class_rel_speed,omitempty"`
-			CarClassLicenseLevel    int     `yaml:"CarClassLicenseLevel" json:"car_class_license_level,omitempty"`
-			CarClassMaxFuelPct      string  `yaml:"CarClassMaxFuelPct" json:"car_class_max_fuel_pct,omitempty"`
-			CarClassWeightPenalty   string  `yaml:"CarClassWeightPenalty" json:"car_class_weight_penalty,omitempty"`
-			CarClassPowerAdjust     string  `yaml:"CarClassPowerAdjust" json:"car_class_power_adjust,omitempty"`
-			CarClassDryTireSetLimit string  `yaml:"CarClassDryTireSetLimit" json:"car_class_dry_tire_set_limit,omitempty"`
-			CarClassColor           int     `yaml:"CarClassColor" json:"car_class_color,omitempty"`
-			CarClassEstLapTime      float64 `yaml:"CarClassEstLapTime" json:"car_class_est_lap_time,omitempty"`
-			IRating                 int     `yaml:"IRating" json:"i_rating,omitempty"`
-			LicLevel                int     `yaml:"LicLevel" json:"lic_level,omitempty"`
-			LicSubLevel             int     `yaml:"LicSubLevel" json:"lic_sub_level,omitempty"`
-			LicString               string  `yaml:"LicString" json:"lic_string,omitempty"`
-			LicColor                int     `yaml:"LicColor" json:"lic_color,omitempty"`
-			IsSpectator             int     `yaml:"IsSpectator" json:"is_spectator,omitempty"`
-			CarDesignStr            string  `yaml:"CarDesignStr" json:"car_design_str,omitempty"`
-			HelmetDesignStr         string  `yaml:"HelmetDesignStr" json:"helmet_design_str,omitempty"`
-			SuitDesignStr           string  `yaml:"SuitDesignStr" json:"suit_design_str,omitempty"`
-			BodyType                int     `yaml:"BodyType" json:"body_type,omitempty"`
-			FaceType                int     `yaml:"FaceType" json:"face_type,omitempty"`
-			HelmetType              int     `yaml:"HelmetType" json:"helmet_type,omitempty"`
-			CarNumberDesignStr      string  `yaml:"CarNumberDesignStr" json:"car_number_design_str,omitempty"`
-			CarSponsor1             int     `yaml:"CarSponsor_1" json:"car_sponsor_1,omitempty"`
-			CarSponsor2             int     `yaml:"CarSponsor_2" json:"car_sponsor_2,omitempty"`
-			ClubName                string  `yaml:"ClubName" json:"club_name,omitempty"`
-			ClubID                  int     `yaml:"ClubID" json:"club_id,omitempty"`
-			DivisionName            string  `yaml:"DivisionName" json:"division_name,omitempty"`
-			DivisionID              int     `yaml:"DivisionID" json:"division_id,omitempty"`
-			CurDriverIncidentCount  int     `yaml:"CurDriverIncidentCount" json:"cur_driver_incident_count,omitempty"`
-			TeamIncidentCount       int     `yaml:"TeamIncidentCount" json:"team_incident_count,omitempty"`
-		} `yaml:"Drivers" json:"drivers,omitempty"`
+		DriverCarIdx              int      `yaml:"DriverCarIdx" json:"driver_car_idx,omitempty"`
+		DriverUserID              int      `yaml:"DriverUserID" json:"driver_user_id,omitempty"`
+		PaceCarIdx                int      `yaml:"PaceCarIdx" json:"pace_car_idx,omitempty"`
+		DriverHeadPosX            float64  `yaml:"DriverHeadPosX" json:"driver_head_pos_x,omitempty"`
+		DriverHeadPosY            float64  `yaml:"DriverHeadPosY" json:"driver_head_pos_y,omitempty"`
+		DriverHeadPosZ            float64  `yaml:"DriverHeadPosZ" json:"driver_head_pos_z,omitempty"`
+		DriverCarIsElectric       int      `yaml:"DriverCarIsElectric" json:"driver_car_is_electric,omitempty"`
+		DriverCarIdleRPM          float64  `yaml:"DriverCarIdleRPM" json:"driver_car_idle_rpm,omitempty"`
+		DriverCarRedLine          float64  `yaml:"DriverCarRedLine" json:"driver_car_red_line,omitempty"`
+		DriverCarEngCylinderCount int      `yaml:"DriverCarEngCylinderCount" json:"driver_car_eng_cylinder_count,omitempty"`
+		DriverCarFuelKgPerLtr     float64  `yaml:"DriverCarFuelKgPerLtr" json:"driver_car_fuel_kg_per_ltr,omitempty"`
+		DriverCarFuelMaxLtr       float64  `yaml:"DriverCarFuelMaxLtr" json:"driver_car_fuel_max_ltr,omitempty"`
+		DriverCarMaxFuelPct       float64  `yaml:"DriverCarMaxFuelPct" json:"driver_car_max_fuel_pct,omitempty"`
+		DriverCarGearNumForward   int      `yaml:"DriverCarGearNumForward" json:"driver_car_gear_num_forward,omitempty"`
+		DriverCarGearNeutral      int      `yaml:"DriverCarGearNeutral" json:"driver_car_gear_neutral,omitempty"`
+		DriverCarGearReverse      int      `yaml:"DriverCarGearReverse" json:"driver_car_gear_reverse,omitempty"`
+		DriverCarSLFirstRPM       float64  `yaml:"DriverCarSLFirstRPM" json:"driver_car_sl_first_rpm,omitempty"`
+		DriverCarSLShiftRPM       float64  `yaml:"DriverCarSLShiftRPM" json:"driver_car_sl_shift_rpm,omitempty"`
+		DriverCarSLLastRPM        float64  `yaml:"DriverCarSLLastRPM" json:"driver_car_sl_last_rpm,omitempty"`
+		DriverCarSLBlinkRPM       float64  `yaml:"DriverCarSLBlinkRPM" json:"driver_car_sl_blink_rpm,omitempty"`
+		DriverCarVersion          string   `yaml:"DriverCarVersion" json:"driver_car_version,omitempty"`
+		DriverPitTrkPct           float64  `yaml:"DriverPitTrkPct" json:"driver_pit_trk_pct,omitempty"`
+		DriverCarEstLapTime       float64  `yaml:"DriverCarEstLapTime" json:"driver_car_est_lap_time,omitempty"`
+		DriverSetupName           string   `yaml:"DriverSetupName" json:"driver_setup_name,omitempty"`
+		DriverSetupIsModified     int      `yaml:"DriverSetupIsModified" json:"driver_setup_is_modified,omitempty"`
+		DriverSetupLoadTypeName   string   `yaml:"DriverSetupLoadTypeName" json:"driver_setup_load_type_name,omitempty"`
+		DriverSetupPassedTech     int      `yaml:"DriverSetupPassedTech" json:"driver_setup_passed_tech,omitempty"`
+		DriverIncidentCount       int      `yaml:"DriverIncidentCount" json:"driver_incident_count,omitempty"`
+		Drivers                   []Driver `yaml:"Drivers" json:"drivers,omitempty"`
 	} `yaml:"DriverInfo" json:"driver_info"`
 	SplitTimeInfo struct {
 		Sectors []struct {
@@ -359,4 +311,54 @@ type ResultsPositions struct {
 	Incidents         int     `yaml:"Incidents" json:"incidents,omitempty"`
 	ReasonOutID       int     `yaml:"ReasonOutId" json:"reason_out_id,omitempty"`
 	ReasonOutStr      string  `yaml:"ReasonOutStr" json:"reason_out_str,omitempty"`
+}
+
+type Driver struct {
+	CarIdx                  int     `yaml:"CarIdx" json:"car_idx,omitempty"`
+	UserName                string  `yaml:"UserName" json:"user_name,omitempty"`
+	AbbrevName              string  `yaml:"AbbrevName" json:"abbrev_name,omitempty"`
+	Initials                string  `yaml:"Initials" json:"initials,omitempty"`
+	UserID                  int     `yaml:"UserID" json:"user_id,omitempty"`
+	TeamID                  int     `yaml:"TeamID" json:"team_id,omitempty"`
+	TeamName                string  `yaml:"TeamName" json:"team_name,omitempty"`
+	CarNumber               string  `yaml:"CarNumber" json:"car_number,omitempty"`
+	CarNumberRaw            int     `yaml:"CarNumberRaw" json:"car_number_raw,omitempty"`
+	CarPath                 string  `yaml:"CarPath" json:"car_path,omitempty"`
+	CarClassID              int     `yaml:"CarClassID" json:"car_class_id,omitempty"`
+	CarID                   int     `yaml:"CarID" json:"car_id,omitempty"`
+	CarIsPaceCar            int     `yaml:"CarIsPaceCar" json:"car_is_pace_car,omitempty"`
+	CarIsAI                 int     `yaml:"CarIsAI" json:"car_is_ai,omitempty"`
+	CarIsElectric           int     `yaml:"CarIsElectric" json:"car_is_electric,omitempty"`
+	CarScreenName           string  `yaml:"CarScreenName" json:"car_screen_name,omitempty"`
+	CarScreenNameShort      string  `yaml:"CarScreenNameShort" json:"car_screen_name_short,omitempty"`
+	CarClassShortName       string  `yaml:"CarClassShortName" json:"car_class_short_name,omitempty"`
+	CarClassRelSpeed        int     `yaml:"CarClassRelSpeed" json:"car_class_rel_speed,omitempty"`
+	CarClassLicenseLevel    int     `yaml:"CarClassLicenseLevel" json:"car_class_license_level,omitempty"`
+	CarClassMaxFuelPct      string  `yaml:"CarClassMaxFuelPct" json:"car_class_max_fuel_pct,omitempty"`
+	CarClassWeightPenalty   string  `yaml:"CarClassWeightPenalty" json:"car_class_weight_penalty,omitempty"`
+	CarClassPowerAdjust     string  `yaml:"CarClassPowerAdjust" json:"car_class_power_adjust,omitempty"`
+	CarClassDryTireSetLimit string  `yaml:"CarClassDryTireSetLimit" json:"car_class_dry_tire_set_limit,omitempty"`
+	CarClassColor           int     `yaml:"CarClassColor" json:"car_class_color,omitempty"`
+	CarClassEstLapTime      float64 `yaml:"CarClassEstLapTime" json:"car_class_est_lap_time,omitempty"`
+	IRating                 int     `yaml:"IRating" json:"i_rating,omitempty"`
+	LicLevel                int     `yaml:"LicLevel" json:"lic_level,omitempty"`
+	LicSubLevel             int     `yaml:"LicSubLevel" json:"lic_sub_level,omitempty"`
+	LicString               string  `yaml:"LicString" json:"lic_string,omitempty"`
+	LicColor                int     `yaml:"LicColor" json:"lic_color,omitempty"`
+	IsSpectator             int     `yaml:"IsSpectator" json:"is_spectator,omitempty"`
+	CarDesignStr            string  `yaml:"CarDesignStr" json:"car_design_str,omitempty"`
+	HelmetDesignStr         string  `yaml:"HelmetDesignStr" json:"helmet_design_str,omitempty"`
+	SuitDesignStr           string  `yaml:"SuitDesignStr" json:"suit_design_str,omitempty"`
+	BodyType                int     `yaml:"BodyType" json:"body_type,omitempty"`
+	FaceType                int     `yaml:"FaceType" json:"face_type,omitempty"`
+	HelmetType              int     `yaml:"HelmetType" json:"helmet_type,omitempty"`
+	CarNumberDesignStr      string  `yaml:"CarNumberDesignStr" json:"car_number_design_str,omitempty"`
+	CarSponsor1             int     `yaml:"CarSponsor_1" json:"car_sponsor_1,omitempty"`
+	CarSponsor2             int     `yaml:"CarSponsor_2" json:"car_sponsor_2,omitempty"`
+	ClubName                string  `yaml:"ClubName" json:"club_name,omitempty"`
+	ClubID                  int     `yaml:"ClubID" json:"club_id,omitempty"`
+	DivisionName            string  `yaml:"DivisionName" json:"division_name,omitempty"`
+	DivisionID              int     `yaml:"DivisionID" json:"division_id,omitempty"`
+	CurDriverIncidentCount  int     `yaml:"CurDriverIncidentCount" json:"cur_driver_incident_count,omitempty"`
+	TeamIncidentCount       int     `yaml:"TeamIncidentCount" json:"team_incident_count,omitempty"`
 }

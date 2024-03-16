@@ -85,7 +85,7 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 			checkErr(err)
 			// driverIdx, err := sdk.GetSessionData("DriverInfo:DriverCarIdx")
 			// checkErr(err)
-			// incidentCount, err := sdk.GetSessionData("DriverInfo:Drivers:{" + driverIdx + "}CurDriverIncidentCount")
+			// incidentCount, err := sdk.GetSessionData("DriverInfo:Driver:{" + driverIdx + "}CurDriverIncidentCount")
 			// checkErr(err)
 
 			rpmL, err := getRPMData(&sdk)
