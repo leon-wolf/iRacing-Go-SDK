@@ -170,7 +170,7 @@ func checkErr(err error) {
 	}
 }
 
-func getRPMData(sdl *irsdk.IRSDK) (rpmLights, error) {
+func getRPMData(sdk *irsdk.IRSDK) (rpmLights, error) {
 	first, err := sdk.GetSessionData("DriverInfo:DriverCarSLFirstRPM")
 	if err != nil {
 		return rpmLights{}, err
