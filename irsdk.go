@@ -1,12 +1,14 @@
 package irsdk
 
 import (
+	"flag"
 	"fmt"
-	"gopkg.in/yaml.v2"
 	"log"
 	"os"
 	"strings"
 	"time"
+
+	"gopkg.in/yaml.v2"
 
 	"github.com/hidez8891/shm"
 	"github.com/leon-wolf/iRacing-Go-SDK/lib/winevents"
@@ -20,6 +22,7 @@ type IRSDK struct {
 	s             []string
 	tVars         *TelemetryVars
 	lastValidData int64
+	debug         bool
 }
 
 func (sdk *IRSDK) WaitForData(timeout time.Duration) bool {
@@ -108,16 +111,16 @@ func (sdk *IRSDK) Close() {
 }
 
 // Init creates an SDK instance to operate with
-func Init(r reader) IRSDK {
-	if r == nil {
-		var err error
-		r, err = shm.Open(fileMapName, fileMapSize)
-		if err != nil {
-			log.Fatal(err)
-		}
+func Init() IRSDK {
+
+	debug := flag.Bool("debug", false, "debug mode")
+	flag.Parse()
+	r, err := shm.Open(fileMapName, fileMapSize)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	sdk := IRSDK{r: r, lastValidData: 0}
+	sdk := IRSDK{r: r, lastValidData: 0, debug: *debug}
 	winevents.OpenEvent(dataValidEventName)
 	initIRSDK(&sdk)
 	return sdk
@@ -131,7 +134,10 @@ func initIRSDK(sdk *IRSDK) {
 		sdk.tVars.vars = nil
 	}
 	if sessionStatusOK(h.status) {
-		sRaw := readSessionData(sdk.r, &h)
+		if sdk.debug {
+			dumpSessionDataToFile(sdk, "session.yaml")
+		}
+		sRaw := readSessionDataYaml(sdk.r, &h)
 		err := yaml.Unmarshal([]byte(sRaw), &sdk.session)
 		if err != nil {
 			log.Fatal(err)

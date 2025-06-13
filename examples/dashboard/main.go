@@ -9,14 +9,14 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/leon-wolf/iRacing-Go-SDK"
+	irsdk "github.com/leon-wolf/iRacing-Go-SDK"
 )
 
 var sdk irsdk.IRSDK
 var homeTemplate *template.Template
 
 func main() {
-	sdk = irsdk.Init(nil)
+	sdk = irsdk.Init()
 	defer sdk.Close()
 
 	h, err := template.ParseFiles("index.html")

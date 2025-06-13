@@ -3,6 +3,7 @@ package irsdk
 import (
 	"fmt"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 
@@ -23,6 +24,17 @@ func readSessionData(r reader, h *header) string {
 	}
 	yaml := strings.TrimRight(string(rbuf[:h.sessionInfoLen]), "\x00")
 	return yaml
+}
+
+func readSessionDataYaml(r reader, h *header) string {
+	yaml := readSessionData(r, h)
+	return yaml
+}
+
+func dumpSessionDataToFile(sdk *IRSDK, fileName string) error {
+
+	return os.WriteFile(fileName, []byte(readSessionData(sdk.r, sdk.h)), 0644)
+
 }
 
 func getSessionDataPath(lines []string, path string) (string, error) {
